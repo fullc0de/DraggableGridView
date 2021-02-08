@@ -8,18 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		7E7B6BE225D0E7B900AA1078 /* DraggableGridViewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7B6BE125D0E7B900AA1078 /* DraggableGridViewApp.swift */; };
-		7E7B6BE425D0E7B900AA1078 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7B6BE325D0E7B900AA1078 /* ContentView.swift */; };
 		7E7B6BE625D0E7BA00AA1078 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E7B6BE525D0E7BA00AA1078 /* Assets.xcassets */; };
 		7E7B6BE925D0E7BA00AA1078 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E7B6BE825D0E7BA00AA1078 /* Preview Assets.xcassets */; };
+		7E7B6BF225D0E7DD00AA1078 /* DraggableGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7B6BF125D0E7DD00AA1078 /* DraggableGridView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7E7B6BDE25D0E7B900AA1078 /* DraggableGridView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DraggableGridView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E7B6BE125D0E7B900AA1078 /* DraggableGridViewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableGridViewApp.swift; sourceTree = "<group>"; };
-		7E7B6BE325D0E7B900AA1078 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7E7B6BE525D0E7BA00AA1078 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E7B6BE825D0E7BA00AA1078 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7E7B6BEA25D0E7BA00AA1078 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7E7B6BF125D0E7DD00AA1078 /* DraggableGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableGridView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +53,7 @@
 			isa = PBXGroup;
 			children = (
 				7E7B6BE125D0E7B900AA1078 /* DraggableGridViewApp.swift */,
-				7E7B6BE325D0E7B900AA1078 /* ContentView.swift */,
+				7E7B6BF125D0E7DD00AA1078 /* DraggableGridView.swift */,
 				7E7B6BE525D0E7BA00AA1078 /* Assets.xcassets */,
 				7E7B6BEA25D0E7BA00AA1078 /* Info.plist */,
 				7E7B6BE725D0E7BA00AA1078 /* Preview Content */,
@@ -138,7 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E7B6BE425D0E7B900AA1078 /* ContentView.swift in Sources */,
+				7E7B6BF225D0E7DD00AA1078 /* DraggableGridView.swift in Sources */,
 				7E7B6BE225D0E7B900AA1078 /* DraggableGridViewApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,7 +197,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -252,7 +252,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
