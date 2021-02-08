@@ -3,7 +3,7 @@ A grid style collection view that supports to change a position of any item on i
 
 ![](https://github.com/fullc0de/DraggableGridView/blob/main/draggableview_small.gif)
 
-# Requirements
+## Requirements
 iOS 13.1 or higher
 
 ## How to Use
@@ -11,5 +11,5 @@ iOS 13.1 or higher
 I am sure that it's enough for the test view to show how to use the grid view for now.  
 
 ## Install
-I haven't make this project support any dependency manager because this is just for sharing my idea how to create this kind of collection view.  
+I haven't made this project support any dependency manager because this is just for sharing my idea how to create this kind of collection view.  
 If you, therefore, would like to use this view on your project, just simply copy `DraggableGridView.swift` and put it to your project. Or you may be able to make a PR for your preferred manager.
