@@ -1,9 +1,10 @@
 # DraggableGridView
-A grid style collection view that supports to change a position of any item on it by dragging.
+A grid style collection view written in SwiftUI that supports to change a position of any item on it by dragging.
 
 ![](https://github.com/fullc0de/DraggableGridView/blob/main/draggableview_small.gif)
 
 ## Requirements
+SwiftUI
 iOS 13.1 or higher
 
 ## How to Use
