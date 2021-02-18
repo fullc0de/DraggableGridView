@@ -25,7 +25,7 @@ struct DraggableGridViewConfiguration {
     var draggable: Bool = true
     
     /// a minimum time to press any item to trigger dragging.
-    var pressDuration: Double = 0.5
+    var pressDuration: Double = 0.3
     
     
     /// This calculates the width of an item cell based on the width of its container.
