@@ -27,6 +27,8 @@ struct DraggableGridViewConfiguration {
     /// a minimum time to press any item to trigger dragging.
     var pressDuration: Double = 0.3
     
+    /// a scale factor to apply to a picked item on dragging. (experiment)
+    var scaleOnPress: CGFloat = 1.0
     
     /// This calculates the width of an item cell based on the width of its container.
     /// - Parameter width: The width of its container.
@@ -93,6 +95,7 @@ struct DraggableGridView<Content: View, Item: Identifiable>: View {
                         .alignmentGuide(.top) { dimension in
                             -(dimension.height + self.config.vSpace) * CGFloat(self.expectedIndexOf(dataId: item.id) / self.config.column)
                         }
+                        .scaleEffect(isDragging(id: item.id) ? config.scaleOnPress : 1.0)
                         .offset(x: self.isDragging(id: item.id) ? self.dragState.translation.width : 0,
                                 y: self.isDragging(id: item.id) ? self.dragState.translation.height : 0)
                         .anchorPreference(key: ItemBoundsPreferencesKey.self,
@@ -117,45 +120,46 @@ struct DraggableGridView<Content: View, Item: Identifiable>: View {
                                             newState = .dragging(id: item.id, translation: drag.translation, delta: CGPoint(x: deltaX, y: deltaY), draggedRect: draggedRect)
                                         }
                                         
-                                        withAnimation(.easeInOut(duration: 0.3)) {
+                                        withAnimation(.easeInOut(duration: 0.2)) {
                                             self.dragState = newState
                                         }
                                     } else {
                                         self.hapticFeedback.impactOccurred()
-                                        self.dragState = .dragging(id: item.id, translation: .zero, delta: .zero, draggedRect: .zero)
+                                        withAnimation(.easeInOut(duration: 0.2)) {
+                                            self.dragState = .dragging(id: item.id, translation: .zero, delta: .zero, draggedRect: .zero)
+                                        }
                                     }
                                 default:
-                                    self.dragState = .inactive
+                                    break
+                                    //self.dragState = .inactive
                                 }
                             }
                             .onEnded { value in
                                 switch value {
                                 case .second(true, let drag):
-                                    if let drag = drag {
+                                    if drag != nil {
                                         let currentIndex = self.actualIndexOf(dataId: self.dragState.id!)
                                         let newIndex = self.expectedIndexOfDraggedItem()
                                         
                                         self.items.insert(self.items.remove(at: currentIndex), at: newIndex)
 
                                         let dstRect = self.availableItemBounds[newIndex]
-                                        var draggedRect = self.availableItemBounds[currentIndex]
-                                        draggedRect.origin.x += drag.translation.width
-                                        draggedRect.origin.y += drag.translation.height
+                                        let draggedRect = self.dragState.draggedRect
                                         
                                         let remainedDistanceX = draggedRect.origin.x - dstRect.origin.x
                                         let remainedDistanceY = draggedRect.origin.y - dstRect.origin.y
-                                        self.dragState = .dragging(id: item.id, translation: CGSize(width: remainedDistanceX, height: remainedDistanceY), delta: .zero, draggedRect: .zero)
+                                        self.dragState = .dragging(id: item.id, translation: CGSize(width: remainedDistanceX, height: remainedDistanceY), delta: .zero, draggedRect: draggedRect)
 
                                         self.onDragged?(currentIndex, newIndex)
                                         
-                                        withAnimation(.easeInOut(duration: 0.1)) {
+                                        withAnimation(.easeInOut(duration: 0.15)) {
                                             self.dragState = .inactive
                                         }
                                     }
                                 default:
-                                    self.dragState = .inactive
+                                    break
                                 }
-                        }, including: self.config.draggable ? .all : .none)
+                            }, including: self.config.draggable ? .all : .none)
                 }
             }
             .frame(width: geo.size.width, alignment: .topLeading)
@@ -184,10 +188,10 @@ struct DraggableGridView<Content: View, Item: Identifiable>: View {
             
             Spacer()
             
-//            // for debugging
+            // for debugging
 //            Text("new position = \(self.expectedIndexOfDraggedItem())")
 //                .offset(x: 0, y: -40)
-//            Text("dragged rect(origin) = \(self.dragState.draggedRect.minX), \(self.dragState.draggedRect.minY)")
+//            Text("dragged rect = \(self.dragState.draggedRect.width), \(self.dragState.draggedRect.height)")
 //                .offset(x: 0, y: -60)
 //            Text("drag translation = \(self.dragState.translation.width), \(self.dragState.translation.height)")
 //                .offset(x: 0, y: -80)
@@ -268,8 +272,10 @@ struct DraggableGridView<Content: View, Item: Identifiable>: View {
     
     private func expectedIndexOfDraggedItem() -> Int {
         let foundIndex = Array(0..<items.count).first { index in
+            let insetUnit = (self.dragState.draggedRect.size.width * self.config.scaleOnPress - self.dragState.draggedRect.size.width) / 2.0
             let targetBounds = self.availableItemBounds[index]
-            return self.dragState.draggedRect.overlappedRate(overlappingRect: targetBounds) > 0.7
+            let scaledDraggedRect = self.dragState.draggedRect.insetBy(dx: -insetUnit, dy: -insetUnit)
+            return targetBounds.overlappedRate(overlappingRect: scaledDraggedRect) > 0.7
         }
         if let index = foundIndex {
             return index
